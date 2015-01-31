@@ -1,0 +1,423 @@
+<?php
+
+namespace Imaginativo\Bundle\TSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Projeto
+ */
+class Projeto
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $nome;
+
+    /**
+     * @var string
+     */
+    private $descricao;
+
+    /**
+     * @var \DateTime
+     */
+    private $dtInicio;
+
+    /**
+     * @var \DateTime
+     */
+    private $dtFimPrevisto;
+
+    /**
+     * @var \DateTime
+     */
+    private $dtFim;
+
+    /**
+     * @var string
+     */
+    private $status;
+
+    /**
+     * @var string
+     */
+    private $template;
+
+    /**
+     * @var integer
+     */
+    private $horasEstimadas;
+
+    private $cliente;
+
+    private $horas;
+
+    private $despesas;
+
+    private $fases;
+
+    private $atividades;
+
+    public function __construct()
+    {
+        $this->horas = new ArrayCollection();
+        $this->despesas = new ArrayCollection();
+        $this->fases = new ArrayCollection();
+        $this->atividades = new ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     * @return Projeto
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string 
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * Set descricao
+     *
+     * @param string $descricao
+     * @return Projeto
+     */
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+
+        return $this;
+    }
+
+    /**
+     * Get descricao
+     *
+     * @return string 
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    /**
+     * Set dtInicio
+     *
+     * @param \DateTime $dtInicio
+     * @return Projeto
+     */
+    public function setDtInicio($dtInicio)
+    {
+        $this->dtInicio = $dtInicio;
+
+        return $this;
+    }
+
+    /**
+     * Get dtInicio
+     *
+     * @return \DateTime 
+     */
+    public function getDtInicio()
+    {
+        return $this->dtInicio;
+    }
+
+    /**
+     * Set dtFimPrevisto
+     *
+     * @param \DateTime $dtFimPrevisto
+     * @return Projeto
+     */
+    public function setDtFimPrevisto($dtFimPrevisto)
+    {
+        $this->dtFimPrevisto = $dtFimPrevisto;
+
+        return $this;
+    }
+
+    /**
+     * Get dtFimPrevisto
+     *
+     * @return \DateTime 
+     */
+    public function getDtFimPrevisto()
+    {
+        return $this->dtFimPrevisto;
+    }
+
+    /**
+     * Set dtFim
+     *
+     * @param \DateTime $dtFim
+     * @return Projeto
+     */
+    public function setDtFim($dtFim)
+    {
+        $this->dtFim = $dtFim;
+
+        return $this;
+    }
+
+    /**
+     * Get dtFim
+     *
+     * @return \DateTime 
+     */
+    public function getDtFim()
+    {
+        return $this->dtFim;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Projeto
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set template
+     *
+     * @param string $template
+     * @return Projeto
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return string 
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * Set horasEstimadas
+     *
+     * @param integer $horasEstimadas
+     * @return Projeto
+     */
+    public function setHorasEstimadas($horasEstimadas)
+    {
+        $this->horasEstimadas = $horasEstimadas;
+
+        return $this;
+    }
+
+    /**
+     * Get horasEstimadas
+     *
+     * @return integer 
+     */
+    public function getHorasEstimadas()
+    {
+        return $this->horasEstimadas;
+    }
+
+    /**
+     * Add horas
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Hora $horas
+     * @return Projeto
+     */
+    public function addHora(\Imaginativo\Bundle\TSBundle\Entity\Hora $horas)
+    {
+        $this->horas[] = $horas;
+
+        return $this;
+    }
+
+    /**
+     * Remove horas
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Hora $horas
+     */
+    public function removeHora(\Imaginativo\Bundle\TSBundle\Entity\Hora $horas)
+    {
+        $this->horas->removeElement($horas);
+    }
+
+    /**
+     * Get horas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHoras()
+    {
+        return $this->horas;
+    }
+
+    /**
+     * Add despesas
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Despesa $despesas
+     * @return Projeto
+     */
+    public function addDespesa(\Imaginativo\Bundle\TSBundle\Entity\Despesa $despesas)
+    {
+        $this->despesas[] = $despesas;
+
+        return $this;
+    }
+
+    /**
+     * Remove despesas
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Despesa $despesas
+     */
+    public function removeDespesa(\Imaginativo\Bundle\TSBundle\Entity\Despesa $despesas)
+    {
+        $this->despesas->removeElement($despesas);
+    }
+
+    /**
+     * Get despesas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDespesas()
+    {
+        return $this->despesas;
+    }
+
+    /**
+     * Add fases
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Fase $fases
+     * @return Projeto
+     */
+    public function addFase(\Imaginativo\Bundle\TSBundle\Entity\Fase $fases)
+    {
+        $this->fases[] = $fases;
+
+        return $this;
+    }
+
+    /**
+     * Remove fases
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Fase $fases
+     */
+    public function removeFase(\Imaginativo\Bundle\TSBundle\Entity\Fase $fases)
+    {
+        $this->fases->removeElement($fases);
+    }
+
+    /**
+     * Get fases
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFases()
+    {
+        return $this->fases;
+    }
+
+    /**
+     * Add atividades
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Atividade $atividades
+     * @return Projeto
+     */
+    public function addAtividade(\Imaginativo\Bundle\TSBundle\Entity\Atividade $atividades)
+    {
+        $this->atividades[] = $atividades;
+
+        return $this;
+    }
+
+    /**
+     * Remove atividades
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Atividade $atividades
+     */
+    public function removeAtividade(\Imaginativo\Bundle\TSBundle\Entity\Atividade $atividades)
+    {
+        $this->atividades->removeElement($atividades);
+    }
+
+    /**
+     * Get atividades
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAtividades()
+    {
+        return $this->atividades;
+    }
+
+    /**
+     * Set cliente
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Cliente $cliente
+     * @return Projeto
+     */
+    public function setCliente(\Imaginativo\Bundle\TSBundle\Entity\Cliente $cliente = null)
+    {
+        $this->cliente = $cliente;
+
+        return $this;
+    }
+
+    /**
+     * Get cliente
+     *
+     * @return \Imaginativo\Bundle\TSBundle\Entity\Cliente 
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
+    }
+}

@@ -1,0 +1,30 @@
+contato:
+    path:     /
+    defaults: { _controller: "ImaginativoTSBundle:Contato:index" }
+
+contato_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImaginativoTSBundle:Contato:show" }
+
+contato_new:
+    path:     /new
+    defaults: { _controller: "ImaginativoTSBundle:Contato:new" }
+
+contato_create:
+    path:     /create
+    defaults: { _controller: "ImaginativoTSBundle:Contato:create" }
+    requirements: { _method: post }
+
+contato_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImaginativoTSBundle:Contato:edit" }
+
+contato_update:
+    path:     /{id}/update
+    defaults: { _controller: "ImaginativoTSBundle:Contato:update" }
+    requirements: { _method: post|put }
+
+contato_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Contato:delete" }
+    requirements: { _method: post|delete }

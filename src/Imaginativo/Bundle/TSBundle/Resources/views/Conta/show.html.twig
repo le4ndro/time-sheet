@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Conta</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Nome:</th>
+                <td>{{ entity.nome }}</td>
+            </tr>
+            <tr>
+                <th>Razão Social:</th>
+                <td>{{ entity.razaoSocial }}</td>
+            </tr>
+            <tr>
+                <th>CNPJ:</th>
+                <td>{{ entity.cNPJ }}</td>
+            </tr>
+            <tr>
+                <th>Nome Fantasia:</th>
+                <td>{{ entity.nomeFantasia }}</td>
+            </tr>
+            <tr>
+                <th>Criado em:</th>
+                <td>{{ entity.dtCriacao|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Obs:</th>
+                <td>{{ entity.obs }}</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+                <th>Id:</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <br/>
+        <a href="{{ path('conta') }}" class="btn btn-primary">
+            Voltar para a lista de contas
+        </a>
+        <br/><br/>
+        <a href="{{ path('conta_edit', { 'id': entity.id }) }}" class="btn btn-primary">
+            Editar
+        </a>
+    <br/><br/>
+    {{ form(delete_form) }}
+
+{% endblock %}

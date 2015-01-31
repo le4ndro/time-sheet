@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Projetos</h1>
+
+    <a href="{{ path('projeto_new') }}" class="btn btn-primary">
+                Novo Projeto
+            </a>
+    <br/><br/>        
+    <table class="records_list table table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Início</th>
+                <th>Término Previsto</th>
+                <th>Término</th>
+                <th>Status</th>
+                <th>Id</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('projeto_show', { 'id': entity.id }) }}">{{ entity.nome }}</a></td>
+                <td>{{ entity.descricao }}</td>
+                <td>{% if entity.dtInicio %}{{ entity.dtInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dtFimPrevisto %}{{ entity.dtFimPrevisto|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dtFim %}{{ entity.dtFim|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.status }}</td>    
+                <td>{{ entity.id }}</td>
+                <td>
+                
+                <a href="{{ path('projeto_show', { 'id': entity.id }) }}" class="btn btn-primary">Exibir</a>
+            
+                <a href="{{ path('projeto_edit', { 'id': entity.id }) }}" class="btn btn-primary">Editar</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        
+            
+        
+    {% endblock %}

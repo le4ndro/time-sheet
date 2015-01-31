@@ -1,0 +1,7 @@
+imaginativo_ts:
+    resource: "@ImaginativoTSBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation

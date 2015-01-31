@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Imaginativo\Bundle\TSBundle\Entity\Despesa">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="nome" type="string" column="nome" length="255"/>
+    <field name="tipo" type="string" column="tipo" length="255"/>
+    <field name="dtDispesa" type="datetime" column="dt_dispesa"/>
+    <field name="reembolsavel" type="boolean" column="reembolsavel"/>
+    <field name="faturado" type="boolean" column="faturado"/>
+    <field name="aprovado" type="boolean" column="aprovado"/>
+    <field name="creditado" type="boolean" column="creditado"/>
+    <many-to-one
+            field="projeto"
+            target-entity="Projeto"
+            inversed-by="horas"
+            join-column="projeto">
+
+            <join-column name="projeto_id" referenced-column-name="id" />
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,30 @@
+equipe:
+    path:     /
+    defaults: { _controller: "ImaginativoTSBundle:Equipe:index" }
+
+equipe_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImaginativoTSBundle:Equipe:show" }
+
+equipe_new:
+    path:     /new
+    defaults: { _controller: "ImaginativoTSBundle:Equipe:new" }
+
+equipe_create:
+    path:     /create
+    defaults: { _controller: "ImaginativoTSBundle:Equipe:create" }
+    requirements: { _method: post }
+
+equipe_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImaginativoTSBundle:Equipe:edit" }
+
+equipe_update:
+    path:     /{id}/update
+    defaults: { _controller: "ImaginativoTSBundle:Equipe:update" }
+    requirements: { _method: post|put }
+
+equipe_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Equipe:delete" }
+    requirements: { _method: post|delete }

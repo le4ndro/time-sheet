@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Novo Projeto</h1>
+
+    {{ form(form) }}
+
+    <br/><br/>    
+    <a href="{{ path('projeto') }}" class="btn btn-primary">
+        Voltar para lista de projetos
+    </a>
+   
+{% endblock %}

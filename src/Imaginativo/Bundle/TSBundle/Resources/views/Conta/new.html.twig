@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Nova Conta</h1>
+
+    {{ form(form) }}
+
+    <br/><br/>    
+    <a href="{{ path('conta') }}" class="btn btn-primary">
+        Voltar para a lista de contas
+    </a>
+    
+{% endblock %}

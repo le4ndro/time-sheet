@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Imaginativo\Bundle\TSBundle\Entity\Projeto">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="nome" type="string" column="nome" length="255"/>
+    <field name="descricao" type="text" column="descricao"/>
+    <field name="dtInicio" type="datetime" column="dt_inicio"/>
+    <field name="dtFimPrevisto" type="datetime" column="dt_fim_previsto"/>
+    <field name="dtFim" type="datetime" column="dt_fim" nullable="true"/>
+    <field name="status" type="string" column="status" length="255"/>
+    <field name="template" type="string" column="template" length="255"/>
+    <field name="horasEstimadas" type="integer" column="horas_estimadas"/>
+    <many-to-one
+            field="cliente"
+            target-entity="Cliente"
+            inversed-by="projetos"
+            join-column="cliente">
+
+            <join-column name="cliente_id" referenced-column-name="id" />
+    </many-to-one>        
+    <one-to-many
+            field="horas"
+            target-entity="Hora"
+            mapped-by="projeto" />  
+    <one-to-many
+            field="despesas"
+            target-entity="Despesa"
+            mapped-by="projeto" />
+    <one-to-many
+            field="fases"
+            target-entity="Fase"
+            mapped-by="projeto" />                  
+    <one-to-many
+            field="atividades"
+            target-entity="Atividade"
+            mapped-by="projeto" />                                    
+  </entity>
+</doctrine-mapping>

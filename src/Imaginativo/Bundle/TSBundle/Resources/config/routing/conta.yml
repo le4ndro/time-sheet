@@ -1,0 +1,30 @@
+conta:
+    path:     /
+    defaults: { _controller: "ImaginativoTSBundle:Conta:index" }
+
+conta_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImaginativoTSBundle:Conta:show" }
+
+conta_new:
+    path:     /new
+    defaults: { _controller: "ImaginativoTSBundle:Conta:new" }
+
+conta_create:
+    path:     /create
+    defaults: { _controller: "ImaginativoTSBundle:Conta:create" }
+    requirements: { _method: post }
+
+conta_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImaginativoTSBundle:Conta:edit" }
+
+conta_update:
+    path:     /{id}/update
+    defaults: { _controller: "ImaginativoTSBundle:Conta:update" }
+    requirements: { _method: post|put }
+
+conta_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Conta:delete" }
+    requirements: { _method: post|delete }

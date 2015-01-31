@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Imaginativo\Bundle\TSBundle\Entity\Contato">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="nome" type="string" column="nome" length="255"/>
+    <field name="cargo" type="string" column="cargo" length="255"/>
+    <field name="funcao" type="string" column="funcao" length="255"/>
+    <field name="email" type="string" column="email" length="255"/>
+    <field name="telefone" type="string" column="telefone" length="255"/>
+    <field name="celular" type="string" column="celular" length="255"/>
+    <field name="obs" type="text" column="obs"/>
+    <field name="status" type="boolean" column="status"/>
+
+    <many-to-one
+            field="cliente"
+            target-entity="Cliente"
+            inversed-by="contatos"
+            join-column="cliente">
+
+            <join-column name="cliente_id" referenced-column-name="id" />
+        </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Contas</h1>
+
+    <a href="{{ path('conta_new') }}" class="btn btn-primary">
+        Criar nova conta
+    </a>
+    <br/><br/>
+
+    <table class="records_list table table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Razão Social</th>
+                <th>CNPJ</th>
+                <th>Nome Fantasia</th>
+                <th>Criado em</th>
+                <th>Obs</th>
+                <th>Status</th>
+                <th>Id</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('conta_show', { 'id': entity.id }) }}">{{ entity.nome }}</a></td>
+                <td>{{ entity.razaoSocial }}</td>
+                <td>{{ entity.cNPJ }}</td>
+                <td>{{ entity.nomeFantasia }}</td>
+                <td>{% if entity.dtCriacao %}{{ entity.dtCriacao|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ entity.obs }}</td>
+                <td>{{ entity.status }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                
+                <a href="{{ path('conta_show', { 'id': entity.id }) }}" class="btn btn-primary">Exibir</a>
+
+                <a href="{{ path('conta_edit', { 'id': entity.id }) }}" class="btn btn-primary">Editar</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        
+            
+        
+    {% endblock %}

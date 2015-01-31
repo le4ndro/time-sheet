@@ -1,0 +1,30 @@
+projeto:
+    path:     /
+    defaults: { _controller: "ImaginativoTSBundle:Projeto:index" }
+
+projeto_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImaginativoTSBundle:Projeto:show" }
+
+projeto_new:
+    path:     /new
+    defaults: { _controller: "ImaginativoTSBundle:Projeto:new" }
+
+projeto_create:
+    path:     /create
+    defaults: { _controller: "ImaginativoTSBundle:Projeto:create" }
+    requirements: { _method: post }
+
+projeto_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImaginativoTSBundle:Projeto:edit" }
+
+projeto_update:
+    path:     /{id}/update
+    defaults: { _controller: "ImaginativoTSBundle:Projeto:update" }
+    requirements: { _method: post|put }
+
+projeto_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Projeto:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,30 @@
+membro:
+    path:     /
+    defaults: { _controller: "ImaginativoTSBundle:Membro:index" }
+
+membro_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImaginativoTSBundle:Membro:show" }
+
+membro_new:
+    path:     /new
+    defaults: { _controller: "ImaginativoTSBundle:Membro:new" }
+
+membro_create:
+    path:     /create
+    defaults: { _controller: "ImaginativoTSBundle:Membro:create" }
+    requirements: { _method: post }
+
+membro_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImaginativoTSBundle:Membro:edit" }
+
+membro_update:
+    path:     /{id}/update
+    defaults: { _controller: "ImaginativoTSBundle:Membro:update" }
+    requirements: { _method: post|put }
+
+membro_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Membro:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Projeto</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Nome:</th>
+                <td>{{ entity.nome }}</td>
+            </tr>
+            <tr>
+                <th>Descrição:</th>
+                <td>{{ entity.descricao }}</td>
+            </tr>
+            <tr>
+                <th>Início:</th>
+                <td>{{ entity.dtInicio|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Término Previsto:</th>
+                <td>{{ entity.dtFimPrevisto|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Término:</th>
+                <td>{{ entity.dtFim|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+                <th>Template:</th>
+                <td>{{ entity.template }}</td>
+            </tr>
+            <tr>
+                <th>Horas Estimadas:</th>
+                <td>{{ entity.horasEstimadas }}</td>
+            </tr>
+            <tr>
+                <th>Id:</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/><br/>    
+    <a href="{{ path('projeto') }}" class="btn btn-primary">
+        Voltar para a lista de projetos
+    </a>
+    <br/><br/>
+    <a href="{{ path('projeto_edit', { 'id': entity.id }) }}" class="btn btn-primary">
+        Editar
+    </a>
+    <br/><br/>
+    {{ form(delete_form) }}
+{% endblock %}

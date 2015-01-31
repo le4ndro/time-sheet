@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Equipes</h1>
+
+    <a href="{{ path('equipe_new') }}" class="btn btn-primary">
+        Criar equipe
+    </a>
+    <br/><br/>
+    <table class="records_list table table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Nome</th>                                
+                <th>Criado em</th>
+                <th>Status</th>
+                <th>Id</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('equipe_show', { 'id': entity.id }) }}">{{ entity.nome }}</a></td>                                
+                <td>{% if entity.dtCriacao %}{{ entity.dtCriacao|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ entity.status }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                
+                        <a href="{{ path('equipe_show', { 'id': entity.id }) }}" class="btn btn-primary">Exibir</a>
+                    
+                        <a href="{{ path('equipe_edit', { 'id': entity.id }) }}" class="btn btn-primary">Editar</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        
+            
+        
+    {% endblock %}

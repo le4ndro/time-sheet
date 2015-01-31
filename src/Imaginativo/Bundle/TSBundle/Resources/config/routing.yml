@@ -1,0 +1,27 @@
+imaginativo_ts_projeto:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/projeto.yml"
+    prefix:   /projeto
+
+imaginativo_ts_contato:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/contato.yml"
+    prefix:   /contato
+
+imaginativo_ts_cliente:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/cliente.yml"
+    prefix:   /cliente
+
+imaginativo_ts_membro:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/membro.yml"
+    prefix:   /membro
+
+imaginativo_ts_equipe:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/equipe.yml"
+    prefix:   /equipe
+
+imaginativo_ts_conta:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/conta.yml"
+    prefix:   /conta
+
+imaginativo_ts_homepage:
+    path:     /
+    defaults: { _controller: ImaginativoTSBundle:Default:index }

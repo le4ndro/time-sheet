@@ -1,0 +1,4 @@
+services:
+#    imaginativo_ts.example:
+#        class: Imaginativo\Bundle\TSBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
