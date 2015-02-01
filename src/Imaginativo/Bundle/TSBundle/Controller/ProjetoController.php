@@ -24,6 +24,8 @@ class ProjetoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('ImaginativoTSBundle:Projeto')->findAll();
+        
+        
 
         return $this->render('ImaginativoTSBundle:Projeto:index.html.twig', array(
             'entities' => $entities,

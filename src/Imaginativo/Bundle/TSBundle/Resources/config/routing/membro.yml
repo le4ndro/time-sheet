@@ -9,11 +9,20 @@ membro_show:
 membro_new:
     path:     /new
     defaults: { _controller: "ImaginativoTSBundle:Membro:new" }
+    
+membro_equipe_new:
+    path:     /{id}/membroequipe
+    defaults: { _controller: "ImaginativoTSBundle:Membro:newMembroEquipe" }
 
 membro_create:
     path:     /create
     defaults: { _controller: "ImaginativoTSBundle:Membro:create" }
     requirements: { _method: post }
+    
+membro_equipe_create:
+    path:     /{id}/create
+    defaults: { _controller: "ImaginativoTSBundle:Membro:createMembroEquipe" }
+    requirements: { _method: post|put }    
 
 membro_edit:
     path:     /{id}/edit

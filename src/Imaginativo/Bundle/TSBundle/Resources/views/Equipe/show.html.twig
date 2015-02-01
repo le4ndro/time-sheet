@@ -1,8 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+   <div class="row">
     <h1>Equipe</h1>
-
+    
     <table class="record_properties">
         <tbody>
             <tr>
@@ -31,15 +32,74 @@
             </tr>
         </tbody>
     </table>
+    <div class="row"> <p></p> </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <a href="{{ path('equipe') }}" class="btn btn-primary">
+                Ir para a lista de equipes
+            </a>
+        </div>
+          <div class="col-sm-1">
+            <a href="{{ path('equipe_edit', { 'id': entity.id }) }}" class="btn btn-primary">
+                Editar 
+            </a>    
+        </div>
+        <div class="clearfix col-sm-1">
+            <a href="{{ path('equipe_desabilitar', { 'id': entity.id }) }}" class="btn btn-primary">
+                Desabilitar
+            </a>
+        </div>
+        <div class="clearfix">   
+            <!-- {{ form(delete_form) }} -->
+         </div>
+    </div>
 
-        <br/>
-        <a href="{{ path('equipe') }}" class="btn btn-primary">
-            Voltar para a lista de equipes
-        </a>
-        <br/><br/>
-        <a href="{{ path('equipe_edit', { 'id': entity.id }) }}" class="btn btn-primary">
-            Editar
-        </a>
-<br/><br/>
-    {{ form(delete_form) }}
+    
+    <!-- Membros -->
+<div class="row">    
+<h1>Membros</h1>
+            
+    <a href="{{ path('membro_equipe_new', { 'id': entity.id }) }}" class="btn btn-primary">
+    Novo membro
+</a>
+<br/><br/>    
+</div>
+<div class="row">
+    <table class="records_list table table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cargo</th>
+
+                <th>Email</th>
+
+                <th>Status</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for membro in entity.membros %}
+            <tr>
+                <td><a href="{{ path('membro_show', { 'id': entity.id }) }}">{{ membro.nome }}</a></td>
+                <td>{{ membro.cargo }}</td>
+
+                <td>{{ membro.email }}</td>
+
+                <td>{{ membro.status }}</td>
+                <td>{{ membro.id }}</td>
+                <td>
+
+                    <a href="{{ path('membro_show', { 'id': membro.id }) }}" class="btn btn-primary">Exibir</a>
+
+                    <a href="{{ path('membro_edit', { 'id': membro.id }) }}" class="btn btn-primary">Editar</a>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <!-- Fim Membros -->
 {% endblock %}

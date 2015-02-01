@@ -3,6 +3,7 @@
 namespace Imaginativo\Bundle\TSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Conta
@@ -52,13 +53,13 @@ class Conta
 
     private $status;
 
-    /*
+    
     public function __contruct()
     {
         $this->equipes = new ArrayCollection();
         $this->clientes = new ArrayCollection();
     }
-    */
+    
 
     /**
      * Get id
@@ -207,14 +208,6 @@ class Conta
     {
         return $this->obs;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->equipes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->clientes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Set endereco
@@ -303,5 +296,34 @@ class Conta
     public function getClientes()
     {
         return $this->clientes;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Conta
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function __toString(){
+ 
+        return $this->nome;
+ 
     }
 }

@@ -1,18 +1,24 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Membro list</h1>
+<h1>Membros</h1>
 
-    <table class="records_list">
+<div class="row">
+<p>        
+    <a href="{{ path('membro_new') }}" class="btn btn-primary">
+    Novo membro
+</a>
+    </p>
+</div>
+<div class="row">
+<table class="records_list table table-striped table-bordered table-condensed">
         <thead>
             <tr>
                 <th>Nome</th>
                 <th>Cargo</th>
-                <th>Funcao</th>
+                
                 <th>Email</th>
-                <th>Cargahorariadia</th>
-                <th>Obs</th>
-                <th>Valorhora</th>
+                
                 <th>Status</th>
                 <th>Id</th>
                 <th>Actions</th>
@@ -23,33 +29,24 @@
             <tr>
                 <td><a href="{{ path('membro_show', { 'id': entity.id }) }}">{{ entity.nome }}</a></td>
                 <td>{{ entity.cargo }}</td>
-                <td>{{ entity.funcao }}</td>
+                
                 <td>{{ entity.email }}</td>
-                <td>{{ entity.cargaHorariaDia }}</td>
-                <td>{{ entity.obs }}</td>
-                <td>{{ entity.valorHora }}</td>
+                
                 <td>{{ entity.status }}</td>
                 <td>{{ entity.id }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('membro_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('membro_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                
+                    <a href="{{ path('membro_show', { 'id': entity.id }) }}" class="btn btn-primary">Exibir</a>
+                    
+                    <a href="{{ path('membro_edit', { 'id': entity.id }) }}" class="btn btn-primary">Editar</a>
+                    
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('membro_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+</div>
+        
+            
+        
     {% endblock %}

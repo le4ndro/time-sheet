@@ -3,6 +3,7 @@
 namespace Imaginativo\Bundle\TSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Atividade
@@ -312,5 +313,11 @@ class Atividade
     public function getProjeto()
     {
         return $this->projeto;
+    }
+
+    public function __toString(){
+ 
+        return $this->nome;
+ 
     }
 }

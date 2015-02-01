@@ -40,6 +40,8 @@ class Equipe
     private $membros;
 
     private $status;
+    
+    private $responsavel;
 
     public function __construct()
     {
@@ -232,5 +234,28 @@ class Equipe
  
         return $this->nome;
  
+    }
+
+    /**
+     * Set responsavel
+     *
+     * @param \Imaginativo\Bundle\TSBundle\Entity\Membro $responsavel
+     * @return Equipe
+     */
+    public function setResponsavel(\Imaginativo\Bundle\TSBundle\Entity\Membro $responsavel = null)
+    {
+        $this->responsavel = $responsavel;
+
+        return $this;
+    }
+
+    /**
+     * Get responsavel
+     *
+     * @return \Imaginativo\Bundle\TSBundle\Entity\Membro 
+     */
+    public function getResponsavel()
+    {
+        return $this->responsavel;
     }
 }

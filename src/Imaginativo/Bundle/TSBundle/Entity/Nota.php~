@@ -133,4 +133,10 @@ class Nota
     {
         return $this->atividade;
     }
+
+    public function __toString(){
+ 
+        return $this->nome;
+ 
+    }
 }

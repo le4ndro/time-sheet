@@ -1,16 +1,25 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Membro edit</h1>
+<h1>Editar Membro</h1>
 
-    {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('membro') }}">
-            Back to the list
+<div class="row">
+    <div class="col-md-6">    
+        {{ form(edit_form) }}
+    </div>
+</div>
+
+<div class="row">
+    <p>    
+        <div class="col-md-2">       
+        <a href="{{ path('membro') }}" class="btn btn-primary">
+                    Ir para lista de membros
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        </div>
+        <div class="col-md-1">        
+            {{ form(delete_form) }}
+        </div>
+    </p>
+</div>    
 {% endblock %}

@@ -1,42 +1,73 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
-    <h1>Equipes</h1>
-
+{% extends '::base.html.twig' %} {% block body -%}
+<h1>Equipes</h1>
+<div class="row">
+  <div class="col-md-6">
+   <p>
     <a href="{{ path('equipe_new') }}" class="btn btn-primary">
         Criar equipe
     </a>
-    <br/><br/>
-    <table class="records_list table table-striped table-bordered table-condensed">
-        <thead>
-            <tr>
-                <th>Nome</th>                                
-                <th>Criado em</th>
-                <th>Status</th>
-                <th>Id</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('equipe_show', { 'id': entity.id }) }}">{{ entity.nome }}</a></td>                                
-                <td>{% if entity.dtCriacao %}{{ entity.dtCriacao|date('d/m/Y') }}{% endif %}</td>
-                <td>{{ entity.status }}</td>
-                <td>{{ entity.id }}</td>
-                <td>
-                
-                        <a href="{{ path('equipe_show', { 'id': entity.id }) }}" class="btn btn-primary">Exibir</a>
-                    
-                        <a href="{{ path('equipe_edit', { 'id': entity.id }) }}" class="btn btn-primary">Editar</a>
-                    
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-        
+    <a href="{{ path('membro') }}" class="btn btn-primary">
+       Membros
+    </a>
+    <a href="{{ path('membro_new') }}" class="btn btn-primary">
+    Novo membro
+    </a>
+       
+    </p>
+    </div>
+</div>
+<div class="row">
+   <div class="clearfix col-md-6">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+</div>
+<br/>
+<div class="row">
+<div class="col-md-12">
+<table class="records_list table table-striped table-bordered table-condensed">
+    <thead>
+        <tr>
+            <!--<th>Id</th>
+            <th>Nome</th>
+            <th>Criado em</th>
+            <th>Status</th>-->
+            <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+            <th{% if pagination.isSorted('a.nome') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome', 'a.nome') }}</th>
+            <th{% if pagination.isSorted('a.dtCriacao') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Criado em', 'a.dtCriacao') }}</th>
+            <th{% if pagination.isSorted('a.Status') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Status', 'a.status') }}</th>
+            <th>Ações</th>
             
-        
-    {% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for entity in pagination %}
+        <tr>
+            <td>{{ entity.id }}</td>
+            <td><a href="{{ path('equipe_show', { 'id': entity.id }) }}">{{ entity.nome }}</a>
+            </td>
+            <td>{% if entity.dtCriacao %}{{ entity.dtCriacao|date('d/m/Y') }}{% endif %}</td>
+            <td>{{ entity.status }}</td>
+            <td>
+
+                <a href="{{ path('equipe_show', { 'id': entity.id }) }}" class="btn btn-primary">Exibir</a>
+
+                <a href="{{ path('equipe_edit', { 'id': entity.id }) }}" class="btn btn-primary">Editar</a>
+                
+                <a href="{{ path('equipe_desabilitar', { 'id': entity.id }) }}" class="btn btn-primary">Desabilitar</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

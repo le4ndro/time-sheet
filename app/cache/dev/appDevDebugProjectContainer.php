@@ -141,6 +141,14 @@ class appDevDebugProjectContainer extends Container
             'fragment.renderer.ssi' => 'getFragment_Renderer_SsiService',
             'http_kernel' => 'getHttpKernelService',
             'kernel' => 'getKernelService',
+            'knp_paginator' => 'getKnpPaginatorService',
+            'knp_paginator.helper.processor' => 'getKnpPaginator_Helper_ProcessorService',
+            'knp_paginator.subscriber.filtration' => 'getKnpPaginator_Subscriber_FiltrationService',
+            'knp_paginator.subscriber.paginate' => 'getKnpPaginator_Subscriber_PaginateService',
+            'knp_paginator.subscriber.sliding_pagination' => 'getKnpPaginator_Subscriber_SlidingPaginationService',
+            'knp_paginator.subscriber.sortable' => 'getKnpPaginator_Subscriber_SortableService',
+            'knp_paginator.templating.helper.pagination' => 'getKnpPaginator_Templating_Helper_PaginationService',
+            'knp_paginator.twig.extension.pagination' => 'getKnpPaginator_Twig_Extension_PaginationService',
             'locale_listener' => 'getLocaleListenerService',
             'logger' => 'getLoggerService',
             'monolog.handler.console' => 'getMonolog_Handler_ConsoleService',
@@ -738,6 +746,7 @@ class appDevDebugProjectContainer extends Container
 
         $instance->addListenerService('kernel.controller', array(0 => 'data_collector.router', 1 => 'onKernelController'), 0);
         $instance->addListenerService('kernel.request', array(0 => 'assetic.request_listener', 1 => 'onKernelRequest'), 0);
+        $instance->addListenerService('kernel.request', array(0 => 'knp_paginator.subscriber.sliding_pagination', 1 => 'onKernelRequest'), 0);
         $instance->addListenerService('kernel.controller', array(0 => 'acme.demo.listener', 1 => 'onKernelController'), 0);
         $instance->addSubscriberService('response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener');
         $instance->addSubscriberService('streamed_response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\StreamedResponseListener');
@@ -763,6 +772,11 @@ class appDevDebugProjectContainer extends Container
         $instance->addSubscriberService('sensio_framework_extra.security.listener', 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\SecurityListener');
         $instance->addSubscriberService('debug.dump_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\DumpListener');
         $instance->addSubscriberService('web_profiler.debug_toolbar', 'Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener');
+        $instance->addListenerService('knp_pager.before', array(0 => 'knp_paginator.subscriber.paginate', 1 => 'before'), 0);
+        $instance->addListenerService('knp_pager.pagination', array(0 => 'knp_paginator.subscriber.paginate', 1 => 'pagination'), 0);
+        $instance->addListenerService('knp_pager.before', array(0 => 'knp_paginator.subscriber.sortable', 1 => 'before'), 1);
+        $instance->addListenerService('knp_pager.before', array(0 => 'knp_paginator.subscriber.filtration', 1 => 'before'), 1);
+        $instance->addListenerService('knp_pager.pagination', array(0 => 'knp_paginator.subscriber.sliding_pagination', 1 => 'pagination'), 1);
 
         return $instance;
     }
@@ -793,7 +807,7 @@ class appDevDebugProjectContainer extends Container
         $this->services['debug.templating.engine.php'] = $instance = new \Symfony\Bundle\FrameworkBundle\Templating\TimedPhpEngine($this->get('templating.name_parser'), $this, $this->get('templating.loader'), $this->get('debug.stopwatch'), $this->get('templating.globals'));
 
         $instance->setCharset('UTF-8');
-        $instance->setHelpers(array('slots' => 'templating.helper.slots', 'assets' => 'templating.helper.assets', 'request' => 'templating.helper.request', 'session' => 'templating.helper.session', 'router' => 'templating.helper.router', 'actions' => 'templating.helper.actions', 'code' => 'templating.helper.code', 'translator' => 'templating.helper.translator', 'form' => 'templating.helper.form', 'stopwatch' => 'templating.helper.stopwatch', 'logout_url' => 'templating.helper.logout_url', 'security' => 'templating.helper.security', 'assetic' => 'assetic.helper.dynamic'));
+        $instance->setHelpers(array('slots' => 'templating.helper.slots', 'assets' => 'templating.helper.assets', 'request' => 'templating.helper.request', 'session' => 'templating.helper.session', 'router' => 'templating.helper.router', 'actions' => 'templating.helper.actions', 'code' => 'templating.helper.code', 'translator' => 'templating.helper.translator', 'form' => 'templating.helper.form', 'stopwatch' => 'templating.helper.stopwatch', 'logout_url' => 'templating.helper.logout_url', 'security' => 'templating.helper.security', 'assetic' => 'assetic.helper.dynamic', 'knp_pagination' => 'knp_paginator.templating.helper.pagination'));
 
         return $instance;
     }
@@ -945,7 +959,7 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['doctrine_cache.providers.doctrine.orm.default_metadata_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
 
-        $instance->setNamespace('sf2orm_default_4933deeee25c5d2a41fc43cab913ccc06fad575a69cf5e41ecd55b1f50443d23');
+        $instance->setNamespace('sf2orm_default_c3799820e385162fbfa364aa79d1240eec19ea0d5359988f1d5a4ae333f18d4a');
 
         return $instance;
     }
@@ -962,7 +976,7 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['doctrine_cache.providers.doctrine.orm.default_query_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
 
-        $instance->setNamespace('sf2orm_default_4933deeee25c5d2a41fc43cab913ccc06fad575a69cf5e41ecd55b1f50443d23');
+        $instance->setNamespace('sf2orm_default_c3799820e385162fbfa364aa79d1240eec19ea0d5359988f1d5a4ae333f18d4a');
 
         return $instance;
     }
@@ -979,7 +993,7 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['doctrine_cache.providers.doctrine.orm.default_result_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
 
-        $instance->setNamespace('sf2orm_default_4933deeee25c5d2a41fc43cab913ccc06fad575a69cf5e41ecd55b1f50443d23');
+        $instance->setNamespace('sf2orm_default_c3799820e385162fbfa364aa79d1240eec19ea0d5359988f1d5a4ae333f18d4a');
 
         return $instance;
     }
@@ -1694,6 +1708,114 @@ class appDevDebugProjectContainer extends Container
     protected function getKernelService()
     {
         throw new RuntimeException('You have requested a synthetic service ("kernel"). The DIC does not know how to construct this service.');
+    }
+
+    /**
+     * Gets the 'knp_paginator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Knp\Component\Pager\Paginator A Knp\Component\Pager\Paginator instance.
+     */
+    protected function getKnpPaginatorService()
+    {
+        $this->services['knp_paginator'] = $instance = new \Knp\Component\Pager\Paginator($this->get('debug.event_dispatcher'));
+
+        $instance->setDefaultPaginatorOptions(array('pageParameterName' => 'page', 'sortFieldParameterName' => 'sort', 'sortDirectionParameterName' => 'direction', 'filterFieldParameterName' => 'filterField', 'filterValueParameterName' => 'filterValue', 'distinct' => true));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'knp_paginator.helper.processor' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Knp\Bundle\PaginatorBundle\Helper\Processor A Knp\Bundle\PaginatorBundle\Helper\Processor instance.
+     */
+    protected function getKnpPaginator_Helper_ProcessorService()
+    {
+        return $this->services['knp_paginator.helper.processor'] = new \Knp\Bundle\PaginatorBundle\Helper\Processor($this->get('templating.helper.router'), $this->get('translator'));
+    }
+
+    /**
+     * Gets the 'knp_paginator.subscriber.filtration' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Knp\Component\Pager\Event\Subscriber\Filtration\FiltrationSubscriber A Knp\Component\Pager\Event\Subscriber\Filtration\FiltrationSubscriber instance.
+     */
+    protected function getKnpPaginator_Subscriber_FiltrationService()
+    {
+        return $this->services['knp_paginator.subscriber.filtration'] = new \Knp\Component\Pager\Event\Subscriber\Filtration\FiltrationSubscriber();
+    }
+
+    /**
+     * Gets the 'knp_paginator.subscriber.paginate' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Knp\Component\Pager\Event\Subscriber\Paginate\PaginationSubscriber A Knp\Component\Pager\Event\Subscriber\Paginate\PaginationSubscriber instance.
+     */
+    protected function getKnpPaginator_Subscriber_PaginateService()
+    {
+        return $this->services['knp_paginator.subscriber.paginate'] = new \Knp\Component\Pager\Event\Subscriber\Paginate\PaginationSubscriber();
+    }
+
+    /**
+     * Gets the 'knp_paginator.subscriber.sliding_pagination' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Knp\Bundle\PaginatorBundle\Subscriber\SlidingPaginationSubscriber A Knp\Bundle\PaginatorBundle\Subscriber\SlidingPaginationSubscriber instance.
+     */
+    protected function getKnpPaginator_Subscriber_SlidingPaginationService()
+    {
+        return $this->services['knp_paginator.subscriber.sliding_pagination'] = new \Knp\Bundle\PaginatorBundle\Subscriber\SlidingPaginationSubscriber(array('defaultPaginationTemplate' => 'KnpPaginatorBundle:Pagination:sliding.html.twig', 'defaultSortableTemplate' => 'KnpPaginatorBundle:Pagination:sortable_link.html.twig', 'defaultFiltrationTemplate' => 'KnpPaginatorBundle:Pagination:filtration.html.twig', 'defaultPageRange' => 5));
+    }
+
+    /**
+     * Gets the 'knp_paginator.subscriber.sortable' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Knp\Component\Pager\Event\Subscriber\Sortable\SortableSubscriber A Knp\Component\Pager\Event\Subscriber\Sortable\SortableSubscriber instance.
+     */
+    protected function getKnpPaginator_Subscriber_SortableService()
+    {
+        return $this->services['knp_paginator.subscriber.sortable'] = new \Knp\Component\Pager\Event\Subscriber\Sortable\SortableSubscriber();
+    }
+
+    /**
+     * Gets the 'knp_paginator.templating.helper.pagination' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Knp\Bundle\PaginatorBundle\Templating\PaginationHelper A Knp\Bundle\PaginatorBundle\Templating\PaginationHelper instance.
+     */
+    protected function getKnpPaginator_Templating_Helper_PaginationService()
+    {
+        return $this->services['knp_paginator.templating.helper.pagination'] = new \Knp\Bundle\PaginatorBundle\Templating\PaginationHelper($this->get('knp_paginator.helper.processor'), $this->get('debug.templating.engine.php'));
+    }
+
+    /**
+     * Gets the 'knp_paginator.twig.extension.pagination' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension A Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension instance.
+     */
+    protected function getKnpPaginator_Twig_Extension_PaginationService()
+    {
+        return $this->services['knp_paginator.twig.extension.pagination'] = new \Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension($this->get('knp_paginator.helper.processor'));
     }
 
     /**
@@ -3376,6 +3498,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension($this->get('braincrafted_bootstrap.twig.label_extension'));
         $instance->addExtension($this->get('braincrafted_bootstrap.twig.badge_extension'));
         $instance->addExtension($this->get('braincrafted_bootstrap.twig.form_extension'));
+        $instance->addExtension($this->get('knp_paginator.twig.extension.pagination'));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\DumpExtension($this->get('var_dumper.cloner')));
         $instance->addExtension($this->get('twig.extension.acme.demo'));
         $instance->addExtension(new \Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension());
@@ -3442,6 +3565,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/vendor/doctrine/doctrine-bundle/Resources/views'), 'Doctrine');
         $instance->addPath(($this->targetDirs[3].'/src/Imaginativo/Bundle/TSBundle/Resources/views'), 'ImaginativoTS');
         $instance->addPath(($this->targetDirs[3].'/vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/views'), 'BraincraftedBootstrap');
+        $instance->addPath(($this->targetDirs[3].'/vendor/knplabs/knp-paginator-bundle/Knp/Bundle/PaginatorBundle/Resources/views'), 'KnpPaginator');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), 'Debug');
         $instance->addPath(($this->targetDirs[3].'/src/Acme/DemoBundle/Resources/views'), 'AcmeDemo');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), 'WebProfiler');
@@ -3955,6 +4079,7 @@ class appDevDebugProjectContainer extends Container
                 'DoctrineFixturesBundle' => 'Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle',
                 'DoctrineMigrationsBundle' => 'Doctrine\\Bundle\\MigrationsBundle\\DoctrineMigrationsBundle',
                 'BraincraftedBootstrapBundle' => 'Braincrafted\\Bundle\\BootstrapBundle\\BraincraftedBootstrapBundle',
+                'KnpPaginatorBundle' => 'Knp\\Bundle\\PaginatorBundle\\KnpPaginatorBundle',
                 'DebugBundle' => 'Symfony\\Bundle\\DebugBundle\\DebugBundle',
                 'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
@@ -4576,6 +4701,13 @@ class appDevDebugProjectContainer extends Container
             'braincrafted_bootstrap.output_dir' => NULL,
             'braincrafted_bootstrap.less_filter' => 'less',
             'braincrafted_bootstrap.icon_tag' => 'span',
+            'knp_paginator.class' => 'Knp\\Component\\Pager\\Paginator',
+            'knp_paginator.templating.helper.pagination.class' => 'Knp\\Bundle\\PaginatorBundle\\Templating\\PaginationHelper',
+            'knp_paginator.helper.processor.class' => 'Knp\\Bundle\\PaginatorBundle\\Helper\\Processor',
+            'knp_paginator.template.pagination' => 'KnpPaginatorBundle:Pagination:sliding.html.twig',
+            'knp_paginator.template.filtration' => 'KnpPaginatorBundle:Pagination:filtration.html.twig',
+            'knp_paginator.template.sortable' => 'KnpPaginatorBundle:Pagination:sortable_link.html.twig',
+            'knp_paginator.page_range' => 5,
             'web_profiler.controller.profiler.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ProfilerController',
             'web_profiler.controller.router.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\RouterController',
             'web_profiler.controller.exception.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ExceptionController',

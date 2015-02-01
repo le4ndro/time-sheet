@@ -244,4 +244,10 @@ class Despesa
     {
         return $this->projeto;
     }
+
+    public function __toString(){
+ 
+        return $this->nome;
+ 
+    }
 }

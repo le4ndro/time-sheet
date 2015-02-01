@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Imaginativo\Bundle\TSBundle\Entity\Membro;
 use Imaginativo\Bundle\TSBundle\Form\MembroType;
+use Imaginativo\Bundle\TSBundle\Form\MembroEquipeType;
 
 /**
  * Membro controller.
@@ -41,10 +42,35 @@ class MembroController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setStatus(true);
             $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('membro_show', array('id' => $entity->getId())));
+        }
+
+        return $this->render('ImaginativoTSBundle:Membro:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+    
+    public function createMembroEquipeAction(Request $request, $id)
+    {
+        $entity = new Membro();
+        $form = $this->createCreateFormMembroEquipe($entity, $id);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            
+            $equipe = $em->getRepository('ImaginativoTSBundle:Equipe')->find($id);
+            $entity->setEquipe($equipe);
+            $entity->setStatus(true);
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('equipe_show', array('id' => $id)));
         }
 
         return $this->render('ImaginativoTSBundle:Membro:new.html.twig', array(
@@ -67,7 +93,19 @@ class MembroController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Incluir'));
+
+        return $form;
+    }
+    
+    private function createCreateFormMembroEquipe(Membro $entity, $id)
+    {
+        $form = $this->createForm(new MembroEquipeType(), $entity, array(
+            'action' => $this->generateUrl('membro_equipe_create', array('id' => $id)),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Incluir'));
 
         return $form;
     }
@@ -80,6 +118,17 @@ class MembroController extends Controller
     {
         $entity = new Membro();
         $form   = $this->createCreateForm($entity);
+
+        return $this->render('ImaginativoTSBundle:Membro:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+    
+    public function newMembroEquipeAction($id)
+    {
+        $entity = new Membro();
+        $form   = $this->createCreateFormMembroEquipe($entity, $id);
 
         return $this->render('ImaginativoTSBundle:Membro:new.html.twig', array(
             'entity' => $entity,
@@ -147,7 +196,7 @@ class MembroController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Atualizar'));
 
         return $form;
     }
@@ -217,7 +266,7 @@ class MembroController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('membro_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Excluir'))
             ->getForm()
         ;
     }

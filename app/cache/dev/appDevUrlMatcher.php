@@ -446,6 +446,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\MembroController::newAction',  '_route' => 'membro_new',);
             }
 
+            // membro_equipe_new
+            if (preg_match('#^/membro/(?P<id>[^/]++)/membroequipe$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'membro_equipe_new')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\MembroController::newMembroEquipeAction',));
+            }
+
             // membro_create
             if ($pathinfo === '/membro/create') {
                 if ($this->context->getMethod() != 'POST') {
@@ -456,6 +461,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\MembroController::createAction',  '_route' => 'membro_create',);
             }
             not_membro_create:
+
+            // membro_equipe_create
+            if (preg_match('#^/membro/(?P<id>[^/]++)/create$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                    $allow = array_merge($allow, array('POST', 'PUT'));
+                    goto not_membro_equipe_create;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'membro_equipe_create')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\MembroController::createMembroEquipeAction',));
+            }
+            not_membro_equipe_create:
 
             // membro_edit
             if (preg_match('#^/membro/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
@@ -543,6 +559,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'equipe_delete')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\EquipeController::deleteAction',));
             }
             not_equipe_delete:
+
+            // equipe_desabilitar
+            if (preg_match('#^/equipe/(?P<id>[^/]++)/desabilitar$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'equipe_desabilitar')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\EquipeController::desabilitarAction',));
+            }
 
         }
 

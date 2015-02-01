@@ -164,4 +164,10 @@ class Endereco
     {
         return $this->cEP;
     }
+
+    public function __toString(){
+ 
+        return $this->logradouro;
+ 
+    }
 }

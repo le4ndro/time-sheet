@@ -326,4 +326,13 @@ class Conta
         return $this->nome;
  
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->equipes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->clientes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }

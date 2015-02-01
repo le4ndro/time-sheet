@@ -3,6 +3,7 @@
 namespace Imaginativo\Bundle\TSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Equipe
@@ -39,6 +40,8 @@ class Equipe
     private $membros;
 
     private $status;
+    
+    private $responsavel;
 
     public function __construct()
     {
@@ -202,5 +205,34 @@ class Equipe
     public function getConta()
     {
         return $this->conta;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Equipe
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function __toString(){
+ 
+        return $this->nome;
+ 
     }
 }

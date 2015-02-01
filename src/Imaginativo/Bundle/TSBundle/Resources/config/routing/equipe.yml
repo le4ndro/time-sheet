@@ -28,3 +28,8 @@ equipe_delete:
     path:     /{id}/delete
     defaults: { _controller: "ImaginativoTSBundle:Equipe:delete" }
     requirements: { _method: post|delete }
+
+
+equipe_desabilitar:
+    path:     /{id}/desabilitar
+    defaults: { _controller: "ImaginativoTSBundle:Equipe:desabilitar" }

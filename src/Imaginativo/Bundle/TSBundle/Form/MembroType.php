@@ -17,12 +17,12 @@ class MembroType extends AbstractType
         $builder
             ->add('nome')
             ->add('cargo')
-            ->add('funcao')
+            ->add('funcao', null, array('label' => 'Função'))
             ->add('email')
-            ->add('cargaHorariaDia')
+            ->add('cargaHorariaDia', null, array('label' => 'Carga Horária Diária'))
             ->add('obs')
-            ->add('valorHora')
-            ->add('status')
+            ->add('valorHora', null, array('label' => 'Valor Hora'))
+            //->add('status')
             ->add('equipe')
         ;
     }

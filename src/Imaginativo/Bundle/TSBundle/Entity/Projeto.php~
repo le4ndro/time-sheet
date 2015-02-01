@@ -3,6 +3,7 @@
 namespace Imaginativo\Bundle\TSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Projeto
@@ -419,5 +420,11 @@ class Projeto
     public function getCliente()
     {
         return $this->cliente;
+    }
+
+    public function __toString(){
+ 
+        return $this->nome;
+ 
     }
 }

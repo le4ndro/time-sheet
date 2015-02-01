@@ -19,14 +19,42 @@ class EquipeController extends Controller
      * Lists all Equipe entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ImaginativoTSBundle:Equipe')->findAll();
+        //$entities = $em->getRepository('ImaginativoTSBundle:Equipe')->findAll();
+        
+        $defaultData = array('message' => 'Type your message here');
+        $form = $this->createFormBuilder($defaultData)
+            ->setAction($this->generateUrl('equipe'))
+            ->add('nome', 'text')
+            ->add('Pesquisar', 'submit')
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // data is an array with "name", "email", and "message" keys
+            $data = $form->getData();
+            $dql   = "SELECT a FROM ImaginativoTSBundle:Equipe a where a.nome like :nome";
+            $query = $em->createQuery($dql);    
+            $query->setParameters(['nome' => "%" . $data["nome"] . "%"]);
+        }else{
+            $dql   = "SELECT a FROM ImaginativoTSBundle:Equipe a";
+            $query = $em->createQuery($dql);    
+            
+        }
+         
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1)/*page number*/,
+            3/*limit per page*/
+        );
 
         return $this->render('ImaginativoTSBundle:Equipe:index.html.twig', array(
-            'entities' => $entities,
+            'pagination' => $pagination, 'form' => $form->createView(),
         ));
     }
     /**
@@ -224,5 +252,32 @@ class EquipeController extends Controller
             ->add('submit', 'submit', array('label' => 'Excluir'))
             ->getForm()
         ;
+    }
+    
+    /**
+     * Desabilita uma equipe mudando o seu campo status
+     *
+     * @param mixed $id The entity id
+     *
+     * 
+     */
+    public function desabilitarAction($id)
+    {
+        //$form = $this->createDeleteForm($id);
+        //$form->handleRequest($request);
+
+        //if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('ImaginativoTSBundle:Equipe')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Equipe entity.');
+            }
+
+            $entity->setStatus(false);
+            $em->flush();
+        //}
+
+        return $this->redirect($this->generateUrl('equipe'));
     }
 }

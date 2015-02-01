@@ -3,6 +3,7 @@
 namespace Imaginativo\Bundle\TSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Cliente
@@ -319,5 +320,34 @@ class Cliente
     public function getConta()
     {
         return $this->conta;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Cliente
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function __toString(){
+ 
+        return $this->nome;
+ 
     }
 }

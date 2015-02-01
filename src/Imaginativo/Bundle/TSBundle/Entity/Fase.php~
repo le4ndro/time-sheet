@@ -189,4 +189,10 @@ class Fase
     {
         return $this->projeto;
     }
+
+    public function __toString(){
+ 
+        return $this->descricao;
+ 
+    }
 }

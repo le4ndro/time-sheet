@@ -19,6 +19,12 @@
     <one-to-many
             field="membros"
             target-entity="Membro"
-            mapped-by="equipe" />        
+            mapped-by="equipe" />  
+    <one-to-one 
+              field="responsavel" 
+              target-entity="Membro">
+
+      <join-column name="responsavel_id" referenced-column-name="id" />
+    </one-to-one>               
   </entity>
 </doctrine-mapping>
