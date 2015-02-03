@@ -2,10 +2,15 @@
 
 {% block body -%}
    <div class="row">
-    <h1>Equipe</h1>
     
-    <table class="record_properties">
+    <div class="col-sm-6">
+    <h1>Equipe</h1>
+       <table class="record_properties table table-striped table-bordered table-condensed">
         <tbody>
+            <tr>
+                <th>ID:</th>
+                <td>{{ entity.id }}</td>
+            </tr>
             <tr>
                 <th>Nome:</th>
                 <td>{{ entity.nome }}</td>
@@ -24,16 +29,18 @@
             </tr>
             <tr>
                 <th>Status:</th>
-                <td>{{ entity.status }}</td>
+                <td>{% if entity.status %} Ativo {% else %} Inativo {% endif %}</td>
             </tr>
             <tr>
-                <th>Id:</th>
-                <td>{{ entity.id }}</td>
+                <th>Lider:</th>
+                <td>{{ entity.responsavel.nome | default("") }}</td>
             </tr>
         </tbody>
     </table>
-    <div class="row"> <p></p> </div>
     </div>
+</div>
+    <div class="row"> <p></p> </div>
+    
     <div class="row">
         <div class="col-sm-2">
             <a href="{{ path('equipe') }}" class="btn btn-primary">
@@ -57,15 +64,18 @@
 
     
     <!-- Membros -->
-<div class="row">    
-<h1>Membros</h1>
+<div class="row">   
+<div class="col-md-3"> 
+<h2>Membros</h2>
             
     <a href="{{ path('membro_equipe_new', { 'id': entity.id }) }}" class="btn btn-primary">
     Novo membro
 </a>
-<br/><br/>    
+<br/><br/>
+</div>    
 </div>
 <div class="row">
+   <div class="col-md-12">
     <table class="records_list table table-striped table-bordered table-condensed">
         <thead>
             <tr>
@@ -87,7 +97,7 @@
 
                 <td>{{ membro.email }}</td>
 
-                <td>{{ membro.status }}</td>
+                <td>{% if membro.status %} Ativo {% else %} Inativo {% endif %}</td>
                 <td>{{ membro.id }}</td>
                 <td>
 
@@ -100,6 +110,8 @@
             {% endfor %}
         </tbody>
     </table>
+    </div>
 </div>
+   
     <!-- Fim Membros -->
 {% endblock %}

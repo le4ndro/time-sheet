@@ -1,18 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<div class="row">
+    <div class="col-md-8">   
     <h1>Novo Membro</h1>
 
     {{ form(form) }}
-
-<br/>
-<div class="row">
-    <div class="col-md-4">
-<p>        
+    <br/>    
     <a href="{{ path('membro') }}" class="btn btn-primary">
         Ir para lista de membros
-    </a>
-</p> 
+    </a> 
 </div>  
 </div>   
     

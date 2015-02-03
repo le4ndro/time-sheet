@@ -28,3 +28,7 @@ conta_delete:
     path:     /{id}/delete
     defaults: { _controller: "ImaginativoTSBundle:Conta:delete" }
     requirements: { _method: post|delete }
+    
+conta_endereco:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Conta:endereco" }

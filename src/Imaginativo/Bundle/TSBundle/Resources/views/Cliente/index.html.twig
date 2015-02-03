@@ -11,24 +11,24 @@
     <table class="records_list table table-striped table-bordered table-condensed">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nome</th>
                 <th>Razão Social</th>
                 <th>CNPJ</th>
                 <th>Nome Fantasia</th>
                 <th>Status</th>
-                <th>Id</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
+                <td>{{ entity.id }}</td>
                 <td><a href="{{ path('cliente_show', { 'id': entity.id }) }}">{{ entity.nome }}</a></td>
                 <td>{{ entity.razaoSocial }}</td>
                 <td>{{ entity.cNPJ }}</td>
                 <td>{{ entity.nomeFantasia }}</td>
-                <td>{{ entity.status }}</td>
-                <td>{{ entity.id }}</td>
+                <td>{% if entity.status %} Ativo {% else %} Inativo {% endif %}</td>
                 <td>
                     <a href="{{ path('cliente_show', { 'id': entity.id }) }} " class="btn btn-primary">Exibir</a>
                     <a href="{{ path('cliente_edit', { 'id': entity.id }) }}" class="btn btn-primary">Editar</a>

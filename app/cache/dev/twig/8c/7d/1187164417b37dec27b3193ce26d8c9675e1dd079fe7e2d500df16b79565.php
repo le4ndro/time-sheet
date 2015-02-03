@@ -116,52 +116,55 @@ class __TwigTemplate_8c7d1187164417b37dec27b3193ce26d8c9675e1dd079fe7e2d500df16b
         echo $this->env->getExtension('knp_pagination')->sortable((isset($context["pagination"]) ? $context["pagination"] : $this->getContext($context, "pagination")), "Status", "a.status");
         echo "</th>
             <th>Ações</th>
-            
         </tr>
     </thead>
     <tbody>
         ";
-        // line 45
+        // line 44
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["pagination"]) ? $context["pagination"] : $this->getContext($context, "pagination")));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 46
+            // line 45
             echo "        <tr>
             <td>";
-            // line 47
+            // line 46
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "id", array()), "html", null, true);
             echo "</td>
             <td><a href=\"";
-            // line 48
+            // line 47
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("equipe_show", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "nome", array()), "html", null, true);
             echo "</a>
             </td>
             <td>";
-            // line 50
+            // line 49
             if ($this->getAttribute($context["entity"], "dtCriacao", array())) {
                 echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["entity"], "dtCriacao", array()), "d/m/Y"), "html", null, true);
             }
             echo "</td>
             <td>";
-            // line 51
-            echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "status", array()), "html", null, true);
+            // line 50
+            if ($this->getAttribute($context["entity"], "status", array())) {
+                echo " Ativo ";
+            } else {
+                echo " Inativo ";
+            }
             echo "</td>
             <td>
 
                 <a href=\"";
-            // line 54
+            // line 53
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("equipe_show", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\" class=\"btn btn-primary\">Exibir</a>
 
                 <a href=\"";
-            // line 56
+            // line 55
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("equipe_edit", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\" class=\"btn btn-primary\">Editar</a>
                 
                 <a href=\"";
-            // line 58
+            // line 57
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("equipe_desabilitar", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\" class=\"btn btn-primary\">Desabilitar</a>
 
@@ -172,14 +175,14 @@ class __TwigTemplate_8c7d1187164417b37dec27b3193ce26d8c9675e1dd079fe7e2d500df16b
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 63
+        // line 62
         echo "    </tbody>
 </table>
     ";
-        // line 66
+        // line 65
         echo "    <div class=\"navigation\">
         ";
-        // line 67
+        // line 66
         echo $this->env->getExtension('knp_pagination')->render((isset($context["pagination"]) ? $context["pagination"] : $this->getContext($context, "pagination")));
         echo "
     </div>
@@ -202,6 +205,6 @@ class __TwigTemplate_8c7d1187164417b37dec27b3193ce26d8c9675e1dd079fe7e2d500df16b
 
     public function getDebugInfo()
     {
-        return array (  183 => 67,  180 => 66,  176 => 63,  165 => 58,  160 => 56,  155 => 54,  149 => 51,  143 => 50,  136 => 48,  132 => 47,  129 => 46,  125 => 45,  112 => 39,  104 => 38,  96 => 37,  92 => 36,  76 => 23,  72 => 22,  68 => 21,  56 => 12,  50 => 9,  44 => 6,  38 => 2,  11 => 1,);
+        return array (  186 => 66,  183 => 65,  179 => 62,  168 => 57,  163 => 55,  158 => 53,  148 => 50,  142 => 49,  135 => 47,  131 => 46,  128 => 45,  124 => 44,  112 => 39,  104 => 38,  96 => 37,  92 => 36,  76 => 23,  72 => 22,  68 => 21,  56 => 12,  50 => 9,  44 => 6,  38 => 2,  11 => 1,);
     }
 }

@@ -1,3 +1,7 @@
+imaginativo_ts_endereco:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/endereco.yml"
+    prefix:   /endereco
+
 imaginativo_ts_projeto:
     resource: "@ImaginativoTSBundle/Resources/config/routing/projeto.yml"
     prefix:   /projeto

@@ -35,26 +35,29 @@ class __TwigTemplate_744f17bae18090985ae15a48c1cc6675575e22063e253ac7f0430804af6
     // line 3
     public function block_body($context, array $blocks = array())
     {
-        // line 4
-        echo "<h1>Editar Equipe</h1>
-
+        // line 5
+        echo "<div class=\"row\">
+    <div class=\"col-md-8\">
+    <h1>Editar Equipe</h1>
     ";
-        // line 6
+        // line 8
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["edit_form"]) ? $context["edit_form"] : $this->getContext($context, "edit_form")), 'form');
         echo "
 
     <br/>    
     <a href=\"";
-        // line 9
+        // line 11
         echo $this->env->getExtension('routing')->getPath("equipe");
         echo "\" class=\"btn btn-primary\">
-        Voltar para a lista de equipes
+        Ir para a lista de equipes
     </a>
     <br/><br/>
     ";
-        // line 13
+        // line 15
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : $this->getContext($context, "delete_form")), 'form');
         echo "
+    </div>
+</div>
 ";
     }
 
@@ -70,6 +73,6 @@ class __TwigTemplate_744f17bae18090985ae15a48c1cc6675575e22063e253ac7f0430804af6
 
     public function getDebugInfo()
     {
-        return array (  56 => 13,  49 => 9,  43 => 6,  39 => 4,  36 => 3,  11 => 1,);
+        return array (  57 => 15,  50 => 11,  44 => 8,  39 => 5,  36 => 3,  11 => 1,);
     }
 }

@@ -4,47 +4,47 @@
 <h1>Membros</h1>
 
 <div class="row">
+<div class="col-md-12">
 <p>        
     <a href="{{ path('membro_new') }}" class="btn btn-primary">
     Novo membro
 </a>
     </p>
 </div>
+</div>
 <div class="row">
+<div class="col-md-12">
 <table class="records_list table table-striped table-bordered table-condensed">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nome</th>
                 <th>Cargo</th>
-                
                 <th>Email</th>
-                
                 <th>Status</th>
-                <th>Id</th>
-                <th>Actions</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
+                <td>{{ entity.id }}</td>
                 <td><a href="{{ path('membro_show', { 'id': entity.id }) }}">{{ entity.nome }}</a></td>
                 <td>{{ entity.cargo }}</td>
-                
                 <td>{{ entity.email }}</td>
-                
-                <td>{{ entity.status }}</td>
-                <td>{{ entity.id }}</td>
+                <td>{% if entity.status %} Ativo {% else %} Inativo {% endif %}</td>
                 <td>
                 
                     <a href="{{ path('membro_show', { 'id': entity.id }) }}" class="btn btn-primary">Exibir</a>
                     
                     <a href="{{ path('membro_edit', { 'id': entity.id }) }}" class="btn btn-primary">Editar</a>
-                    
+                    <a href="{{ path('membro_desabilitar', { 'id': entity.id }) }}" class="btn btn-primary">Desabilitar</a>   
                 </td>
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+</table>
+</div>
 </div>
         
             

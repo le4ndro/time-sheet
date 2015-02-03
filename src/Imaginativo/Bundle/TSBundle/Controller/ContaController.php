@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Imaginativo\Bundle\TSBundle\Entity\Conta;
 use Imaginativo\Bundle\TSBundle\Form\ContaType;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 /**
  * Conta controller.
  *
@@ -225,4 +227,35 @@ class ContaController extends Controller
             ->getForm()
         ;
     }
+    
+    /**
+     * Encaminha para inclusão do endereço
+     *
+     * @param mixed $id The entity id
+     *
+     * 
+     */
+    public function enderecoAction($id)
+    {
+        $session = new Session();
+        if (!$this->container->get('session')->isStarted()){
+            $session->start();    
+        }
+
+        $session->set('origem', 'conta');
+        $session->set('idConta', $id);
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('ImaginativoTSBundle:Conta')->find($id);
+
+        if ($entity->getEndereco() !== null){
+            // redirect para edit
+            return $this->redirect($this->generateUrl('endereco_edit', array('id' => $entity->getEndereco()->getId())));
+        }else{
+            //redirect para criar
+            return $this->redirect($this->generateUrl('endereco_new'));
+        }  
+    }
+    
+    
 }

@@ -52,6 +52,33 @@ class ContatoController extends Controller
             'form'   => $form->createView(),
         ));
     }
+    
+    /**
+     * Creates a new Contato entity.
+     *
+     */
+    public function createContatoClienteAction(Request $request, $id)
+    {
+        $entity = new Contato();
+        $form = $this->createContatoClienteCreateForm($entity, $id);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $cliente = $em->getRepository('ImaginativoTSBundle:Cliente')->find($id);
+            $entity->setCliente($cliente);
+            $entity->setStatus(true);
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('contato_show', array('id' => $entity->getId())));
+        }
+
+        return $this->render('ImaginativoTSBundle:Contato:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
 
     /**
      * Creates a form to create a Contato entity.
@@ -67,7 +94,26 @@ class ContatoController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Incluir'));
+
+        return $form;
+    }
+    
+    /**
+     * Creates a form to create a Contato entity.
+     *
+     * @param Contato $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createContatoClienteCreateForm(Contato $entity, $id)
+    {
+        $form = $this->createForm(new ContatoType(), $entity, array(
+            'action' => $this->generateUrl('contato_cliente_create', array('id' => $id)),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Incluir'));
 
         return $form;
     }
@@ -80,6 +126,17 @@ class ContatoController extends Controller
     {
         $entity = new Contato();
         $form   = $this->createCreateForm($entity);
+
+        return $this->render('ImaginativoTSBundle:Contato:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+    
+    public function newContatoClienteAction($id)
+    {
+        $entity = new Contato();
+        $form   = $this->createContatoClienteCreateForm($entity, $id);
 
         return $this->render('ImaginativoTSBundle:Contato:new.html.twig', array(
             'entity' => $entity,
@@ -147,7 +204,7 @@ class ContatoController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Atualizar'));
 
         return $form;
     }
@@ -217,7 +274,7 @@ class ContatoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('contato_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Excluir'))
             ->getForm()
         ;
     }

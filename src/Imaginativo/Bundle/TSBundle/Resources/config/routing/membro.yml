@@ -37,3 +37,7 @@ membro_delete:
     path:     /{id}/delete
     defaults: { _controller: "ImaginativoTSBundle:Membro:delete" }
     requirements: { _method: post|delete }
+    
+membro_desabilitar:
+    path:     /{id}/desabilitar
+    defaults: { _controller: "ImaginativoTSBundle:Membro:desabilitar" }   

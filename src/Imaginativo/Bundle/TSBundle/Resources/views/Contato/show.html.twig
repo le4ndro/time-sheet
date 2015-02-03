@@ -1,10 +1,16 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Contato</h1>
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Contato</h1>
 
-    <table class="record_properties">
+        <table class="record_properties table table-striped table-bordered table-condensed">
         <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
             <tr>
                 <th>Nome</th>
                 <td>{{ entity.nome }}</td>
@@ -14,7 +20,7 @@
                 <td>{{ entity.cargo }}</td>
             </tr>
             <tr>
-                <th>Funcao</th>
+                <th>Função</th>
                 <td>{{ entity.funcao }}</td>
             </tr>
             <tr>
@@ -35,26 +41,31 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ entity.status }}</td>
+                <td>{% if entity.status %} Ativo {% else %} Inativo {% endif %}</td>
             </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
+            
         </tbody>
     </table>
+    </div>
+</div>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('contato') }}">
-            Back to the list
+<div class="row"> 
+    <div class="col-md-2">   
+        <a href="{{ path('contato') }}" class="btn btn-primary">
+            Ir para a lista de contatos
         </a>
-    </li>
-    <li>
-        <a href="{{ path('contato_edit', { 'id': entity.id }) }}">
-            Edit
+    </div>
+    <div class="col-sm-1">
+        <a href="{{ path('contato_edit', { 'id': entity.id }) }}" class="btn btn-primary">
+            Editar
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    </div>
+    <div class="clearfix col-sm-1">
+        <a href="{{ path('contato_edit', { 'id': entity.id }) }}" class="btn btn-primary">
+            Desabilitar
+        </a>
+    </div>
+    <!-- {{ form(delete_form) }} -->
+
+</div>
 {% endblock %}

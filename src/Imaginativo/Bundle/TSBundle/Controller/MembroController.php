@@ -270,4 +270,26 @@ class MembroController extends Controller
             ->getForm()
         ;
     }
+    
+    /**
+     * Desativa o Membro mudando seu campo status para false.
+     *
+     * @param mixed $id The entity id
+     *
+     * 
+     */
+    public function desabilitarAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('ImaginativoTSBundle:Membro')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Equipe entity.');
+        }
+
+        $entity->setStatus(false);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('membro'));
+    }
 }

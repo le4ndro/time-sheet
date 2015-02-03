@@ -38,7 +38,6 @@
             <th{% if pagination.isSorted('a.dtCriacao') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Criado em', 'a.dtCriacao') }}</th>
             <th{% if pagination.isSorted('a.Status') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Status', 'a.status') }}</th>
             <th>Ações</th>
-            
         </tr>
     </thead>
     <tbody>
@@ -48,7 +47,7 @@
             <td><a href="{{ path('equipe_show', { 'id': entity.id }) }}">{{ entity.nome }}</a>
             </td>
             <td>{% if entity.dtCriacao %}{{ entity.dtCriacao|date('d/m/Y') }}{% endif %}</td>
-            <td>{{ entity.status }}</td>
+            <td>{% if entity.status %} Ativo {% else %} Inativo {% endif %}</td>
             <td>
 
                 <a href="{{ path('equipe_show', { 'id': entity.id }) }}" class="btn btn-primary">Exibir</a>

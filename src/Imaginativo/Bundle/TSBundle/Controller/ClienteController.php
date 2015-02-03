@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Imaginativo\Bundle\TSBundle\Entity\Cliente;
 use Imaginativo\Bundle\TSBundle\Form\ClienteType;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 /**
  * Cliente controller.
  *
@@ -224,5 +226,34 @@ class ClienteController extends Controller
             ->add('submit', 'submit', array('label' => 'Excluir'))
             ->getForm()
         ;
+    }
+    
+    /**
+     * Encaminha para inclusão do endereço
+     *
+     * @param mixed $id The entity id
+     *
+     * 
+     */
+    public function enderecoAction($id)
+    {
+        $session = new Session();
+        if (!$this->container->get('session')->isStarted()){
+            $session->start();    
+        }
+        
+        $session->set('origem', 'cliente');
+        $session->set('idCliente', $id);
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('ImaginativoTSBundle:Cliente')->find($id);
+
+        if ($entity->getEndereco() !== null){
+            // redirect para edit
+            return $this->redirect($this->generateUrl('endereco_edit', array('id' => $entity->getEndereco()->getId())));
+        }else{
+            //redirect para criar
+            return $this->redirect($this->generateUrl('endereco_new'));
+        }  
     }
 }

@@ -49,12 +49,12 @@ class __TwigTemplate_3076210b239a964ca5beeb07ee86cd2f9d3b399867f6bd14a267c57398b
     <table class=\"records_list table table-striped table-bordered table-condensed\">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nome</th>
                 <th>Razão Social</th>
                 <th>CNPJ</th>
                 <th>Nome Fantasia</th>
                 <th>Status</th>
-                <th>Id</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -66,31 +66,35 @@ class __TwigTemplate_3076210b239a964ca5beeb07ee86cd2f9d3b399867f6bd14a267c57398b
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
             // line 25
             echo "            <tr>
-                <td><a href=\"";
+                <td>";
             // line 26
+            echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "id", array()), "html", null, true);
+            echo "</td>
+                <td><a href=\"";
+            // line 27
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("cliente_show", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "nome", array()), "html", null, true);
             echo "</a></td>
                 <td>";
-            // line 27
+            // line 28
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "razaoSocial", array()), "html", null, true);
             echo "</td>
                 <td>";
-            // line 28
+            // line 29
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "cNPJ", array()), "html", null, true);
             echo "</td>
                 <td>";
-            // line 29
+            // line 30
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "nomeFantasia", array()), "html", null, true);
             echo "</td>
                 <td>";
-            // line 30
-            echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "status", array()), "html", null, true);
-            echo "</td>
-                <td>";
             // line 31
-            echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "id", array()), "html", null, true);
+            if ($this->getAttribute($context["entity"], "status", array())) {
+                echo " Ativo ";
+            } else {
+                echo " Inativo ";
+            }
             echo "</td>
                 <td>
                     <a href=\"";
@@ -130,6 +134,6 @@ class __TwigTemplate_3076210b239a964ca5beeb07ee86cd2f9d3b399867f6bd14a267c57398b
 
     public function getDebugInfo()
     {
-        return array (  112 => 38,  102 => 34,  98 => 33,  93 => 31,  89 => 30,  85 => 29,  81 => 28,  77 => 27,  71 => 26,  68 => 25,  64 => 24,  43 => 6,  39 => 4,  36 => 3,  11 => 1,);
+        return array (  116 => 38,  106 => 34,  102 => 33,  93 => 31,  89 => 30,  85 => 29,  81 => 28,  75 => 27,  71 => 26,  68 => 25,  64 => 24,  43 => 6,  39 => 4,  36 => 3,  11 => 1,);
     }
 }

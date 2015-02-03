@@ -36,21 +36,24 @@ class __TwigTemplate_8760c148bead07497e875210921ed7f0ee7f3e4c734fb31149e3a47ffec
     public function block_body($context, array $blocks = array())
     {
         // line 4
-        echo "<h1>Nova Equipe</h1>
+        echo "<div class=\"row\">
+   <div class=\"col-md-8\">
+        <h1>Nova Equipe</h1>
 
-    ";
-        // line 6
+        ";
+        // line 8
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form');
         echo "
 
-    <br/><br/>    
-    <a href=\"";
-        // line 9
+        <br/>   
+        <a href=\"";
+        // line 11
         echo $this->env->getExtension('routing')->getPath("equipe");
         echo "\" class=\"btn btn-primary\">
-        Voltar para a lista de equipes
-    </a>
-    
+            Ir para a lista de equipes
+        </a>
+        </div>
+</div>
 ";
     }
 
@@ -66,6 +69,6 @@ class __TwigTemplate_8760c148bead07497e875210921ed7f0ee7f3e4c734fb31149e3a47ffec
 
     public function getDebugInfo()
     {
-        return array (  49 => 9,  43 => 6,  39 => 4,  36 => 3,  11 => 1,);
+        return array (  51 => 11,  45 => 8,  39 => 4,  36 => 3,  11 => 1,);
     }
 }

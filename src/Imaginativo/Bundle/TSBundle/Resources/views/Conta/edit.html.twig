@@ -1,14 +1,32 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<div class="row">
+    <div class="col-md-8">
     <h1>Editar Conta</h1>
 
     {{ form(edit_form) }}
-
-    <br/>    
-    <a href="{{ path('conta') }}" class="btn btn-primary">
-        Voltar para a lista de contas
-    </a>
-    <br/><br/>
+    </div>
+</div>    
+<br/>
+<div class="row">   
+    <div class="col-sm-2">
+        <a href="{{ path('conta') }}" class="btn btn-primary">
+            Ir para a lista de contas
+        </a>  
+    </div>
+    <div class="col-sm-1">    
+        <a href="{{ path('conta_endereco', { 'id': entity.id }) }}" class="btn btn-primary">
+            Endereço
+        </a>
+    </div>
+    <div class="col-sm-1">
+        <a href="{{ path('cliente_endereco', { 'id': entity.id }) }}" class="btn btn-primary">
+            Desativar
+        </a>
+    </div>
+    <!--
     {{ form(delete_form) }}
+    -->
+</div>
 {% endblock %}

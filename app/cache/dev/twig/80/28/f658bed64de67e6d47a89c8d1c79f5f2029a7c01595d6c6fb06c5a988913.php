@@ -39,73 +39,79 @@ class __TwigTemplate_8028f658bed64de67e6d47a89c8d1c79f5f2029a7c01595d6c6fb06c5a9
         echo "<h1>Membros</h1>
 
 <div class=\"row\">
+<div class=\"col-md-12\">
 <p>        
     <a href=\"";
-        // line 8
+        // line 9
         echo $this->env->getExtension('routing')->getPath("membro_new");
         echo "\" class=\"btn btn-primary\">
     Novo membro
 </a>
     </p>
 </div>
+</div>
 <div class=\"row\">
+<div class=\"col-md-12\">
 <table class=\"records_list table table-striped table-bordered table-condensed\">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nome</th>
                 <th>Cargo</th>
-                
                 <th>Email</th>
-                
                 <th>Status</th>
-                <th>Id</th>
-                <th>Actions</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
         ";
-        // line 28
+        // line 29
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["entities"]) ? $context["entities"] : $this->getContext($context, "entities")));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 29
-            echo "            <tr>
-                <td><a href=\"";
             // line 30
+            echo "            <tr>
+                <td>";
+            // line 31
+            echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "id", array()), "html", null, true);
+            echo "</td>
+                <td><a href=\"";
+            // line 32
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("membro_show", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "nome", array()), "html", null, true);
             echo "</a></td>
                 <td>";
-            // line 31
+            // line 33
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "cargo", array()), "html", null, true);
             echo "</td>
-                
                 <td>";
-            // line 33
+            // line 34
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "email", array()), "html", null, true);
             echo "</td>
-                
                 <td>";
             // line 35
-            echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "status", array()), "html", null, true);
-            echo "</td>
-                <td>";
-            // line 36
-            echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "id", array()), "html", null, true);
+            if ($this->getAttribute($context["entity"], "status", array())) {
+                echo " Ativo ";
+            } else {
+                echo " Inativo ";
+            }
             echo "</td>
                 <td>
                 
                     <a href=\"";
-            // line 39
+            // line 38
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("membro_show", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\" class=\"btn btn-primary\">Exibir</a>
                     
                     <a href=\"";
-            // line 41
+            // line 40
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("membro_edit", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\" class=\"btn btn-primary\">Editar</a>
-                    
+                    <a href=\"";
+            // line 41
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("membro_desabilitar", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
+            echo "\" class=\"btn btn-primary\">Desabilitar</a>   
                 </td>
             </tr>
         ";
@@ -113,9 +119,10 @@ class __TwigTemplate_8028f658bed64de67e6d47a89c8d1c79f5f2029a7c01595d6c6fb06c5a9
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 46
+        // line 45
         echo "        </tbody>
-    </table>
+</table>
+</div>
 </div>
         
             
@@ -135,6 +142,6 @@ class __TwigTemplate_8028f658bed64de67e6d47a89c8d1c79f5f2029a7c01595d6c6fb06c5a9
 
     public function getDebugInfo()
     {
-        return array (  117 => 46,  106 => 41,  101 => 39,  95 => 36,  91 => 35,  86 => 33,  81 => 31,  75 => 30,  72 => 29,  68 => 28,  45 => 8,  39 => 4,  36 => 3,  11 => 1,);
+        return array (  123 => 45,  113 => 41,  109 => 40,  104 => 38,  94 => 35,  90 => 34,  86 => 33,  80 => 32,  76 => 31,  73 => 30,  69 => 29,  46 => 9,  39 => 4,  36 => 3,  11 => 1,);
     }
 }

@@ -1,10 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<div class="row">
+    <div class="col-sm-6">
     <h1>Conta</h1>
-
-    <table class="record_properties">
+    <table class="record_properties table table-striped table-bordered table-condensed">
         <tbody>
+            <tr>
+                <th>Id:</th>
+                <td>{{ entity.id }}</td>
+            </tr>
             <tr>
                 <th>Nome:</th>
                 <td>{{ entity.nome }}</td>
@@ -23,7 +28,7 @@
             </tr>
             <tr>
                 <th>Criado em:</th>
-                <td>{{ entity.dtCriacao|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.dtCriacao|date('d/m/Y') }}</td>
             </tr>
             <tr>
                 <th>Obs:</th>
@@ -31,24 +36,71 @@
             </tr>
             <tr>
                 <th>Status:</th>
-                <td>{{ entity.status }}</td>
-            </tr>
-            <tr>
-                <th>Id:</th>
-                <td>{{ entity.id }}</td>
+                <td>{% if entity.status %} Ativo {% else %} Inativo {%endif%}</td>
             </tr>
         </tbody>
     </table>
-
-        <br/>
+    </div>
+</div>    
+{% if entity.endereco %}
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Endereço</h3>
+        <table class="record_properties table table-striped table-bordered table-condensed">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ entity.endereco.id }}</td>
+                </tr>
+                <tr>
+                    <th>Logradouro</th>
+                    <td>{{ entity.endereco.logradouro }}</td>
+                </tr>
+                <tr>
+                    <th>Bairro</th>
+                    <td>{{ entity.endereco.bairro }}</td>
+                </tr>
+                <tr>
+                    <th>Cidade</th>
+                    <td>{{ entity.endereco.cidade }}</td>
+                </tr>
+                <tr>
+                    <th>Uf</th>
+                    <td>{{ entity.endereco.uF }}</td>
+                </tr>
+                <tr>
+                    <th>Cep</th>
+                    <td>{{ entity.endereco.cEP }}</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>
+{% endif %}
+<div class="row">
+    <div class="col-sm-2">
         <a href="{{ path('conta') }}" class="btn btn-primary">
-            Voltar para a lista de contas
-        </a>
-        <br/><br/>
+            Ir para a lista de contas
+        </a>   
+    </div>
+    <div class="col-sm-1">
         <a href="{{ path('conta_edit', { 'id': entity.id }) }}" class="btn btn-primary">
             Editar
         </a>
-    <br/><br/>
+    </div>
+    <div class="col-sm-1">
+        <a href="{{ path('conta_endereco', { 'id': entity.id }) }}" class="btn btn-primary">
+            Endereço
+        </a>
+    </div>
+    <div class="col-sm-1">
+        <a href="{{ path('conta_endereco', { 'id': entity.id }) }}" class="btn btn-primary">
+            Desativar
+        </a>
+    </div>
+    <!-- 
     {{ form(delete_form) }}
+    -->   
+</div>            
 
 {% endblock %}

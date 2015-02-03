@@ -28,3 +28,7 @@ cliente_delete:
     path:     /{id}/delete
     defaults: { _controller: "ImaginativoTSBundle:Cliente:delete" }
     requirements: { _method: post|delete }
+    
+cliente_endereco:
+    path:     /{id}/clienteendereco
+    defaults: { _controller: "ImaginativoTSBundle:Cliente:endereco" }

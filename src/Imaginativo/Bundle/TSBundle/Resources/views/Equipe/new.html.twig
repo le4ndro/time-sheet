@@ -1,13 +1,16 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Nova Equipe</h1>
+<div class="row">
+   <div class="col-md-8">
+        <h1>Nova Equipe</h1>
 
-    {{ form(form) }}
+        {{ form(form) }}
 
-    <br/><br/>    
-    <a href="{{ path('equipe') }}" class="btn btn-primary">
-        Voltar para a lista de equipes
-    </a>
-    
+        <br/>   
+        <a href="{{ path('equipe') }}" class="btn btn-primary">
+            Ir para a lista de equipes
+        </a>
+        </div>
+</div>
 {% endblock %}

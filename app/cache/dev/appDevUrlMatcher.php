@@ -243,6 +243,66 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/endereco')) {
+            // endereco
+            if (rtrim($pathinfo, '/') === '/endereco') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'endereco');
+                }
+
+                return array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\EnderecoController::indexAction',  '_route' => 'endereco',);
+            }
+
+            // endereco_show
+            if (preg_match('#^/endereco/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'endereco_show')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\EnderecoController::showAction',));
+            }
+
+            // endereco_new
+            if ($pathinfo === '/endereco/new') {
+                return array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\EnderecoController::newAction',  '_route' => 'endereco_new',);
+            }
+
+            // endereco_create
+            if ($pathinfo === '/endereco/create') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_endereco_create;
+                }
+
+                return array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\EnderecoController::createAction',  '_route' => 'endereco_create',);
+            }
+            not_endereco_create:
+
+            // endereco_edit
+            if (preg_match('#^/endereco/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'endereco_edit')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\EnderecoController::editAction',));
+            }
+
+            // endereco_update
+            if (preg_match('#^/endereco/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                    $allow = array_merge($allow, array('POST', 'PUT'));
+                    goto not_endereco_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'endereco_update')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\EnderecoController::updateAction',));
+            }
+            not_endereco_update:
+
+            // endereco_delete
+            if (preg_match('#^/endereco/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                    $allow = array_merge($allow, array('POST', 'DELETE'));
+                    goto not_endereco_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'endereco_delete')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\EnderecoController::deleteAction',));
+            }
+            not_endereco_delete:
+
+        }
+
         if (0 === strpos($pathinfo, '/projeto')) {
             // projeto
             if (rtrim($pathinfo, '/') === '/projeto') {
@@ -324,6 +384,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\ContatoController::newAction',  '_route' => 'contato_new',);
                 }
 
+                // contato_cliente_new
+                if (preg_match('#^/contato/(?P<id>[^/]++)/newcontatocliente$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'contato_cliente_new')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\ContatoController::newContatoClienteAction',));
+                }
+
                 // contato_create
                 if ($pathinfo === '/contato/create') {
                     if ($this->context->getMethod() != 'POST') {
@@ -334,6 +399,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\ContatoController::createAction',  '_route' => 'contato_create',);
                 }
                 not_contato_create:
+
+                // contato_cliente_create
+                if (preg_match('#^/contato/(?P<id>[^/]++)/createcontatocliente$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_contato_cliente_create;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'contato_cliente_create')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\ContatoController::createContatoClienteAction',));
+                }
+                not_contato_cliente_create:
 
                 // contato_edit
                 if (preg_match('#^/contato/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
@@ -422,6 +498,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 }
                 not_cliente_delete:
 
+                // cliente_endereco
+                if (preg_match('#^/cliente/(?P<id>[^/]++)/clienteendereco$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'cliente_endereco')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\ClienteController::enderecoAction',));
+                }
+
             }
 
         }
@@ -499,6 +580,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'membro_delete')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\MembroController::deleteAction',));
             }
             not_membro_delete:
+
+            // membro_desabilitar
+            if (preg_match('#^/membro/(?P<id>[^/]++)/desabilitar$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'membro_desabilitar')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\MembroController::desabilitarAction',));
+            }
 
         }
 
@@ -624,6 +710,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'conta_delete')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\ContaController::deleteAction',));
             }
             not_conta_delete:
+
+            // conta_endereco
+            if (preg_match('#^/conta/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'conta_endereco')), array (  '_controller' => 'Imaginativo\\Bundle\\TSBundle\\Controller\\ContaController::enderecoAction',));
+            }
 
         }
 

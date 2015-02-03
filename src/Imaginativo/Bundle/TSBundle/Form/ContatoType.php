@@ -17,13 +17,13 @@ class ContatoType extends AbstractType
         $builder
             ->add('nome')
             ->add('cargo')
-            ->add('funcao')
+            ->add('funcao', null, array('label' => 'Função'))
             ->add('email')
             ->add('telefone')
             ->add('celular')
             ->add('obs')
-            ->add('status')
-            ->add('cliente')
+            //->add('status')
+            //->add('cliente')
         ;
     }
     

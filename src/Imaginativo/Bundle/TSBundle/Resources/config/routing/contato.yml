@@ -9,11 +9,21 @@ contato_show:
 contato_new:
     path:     /new
     defaults: { _controller: "ImaginativoTSBundle:Contato:new" }
+    
+contato_cliente_new:
+    path:     /{id}/newcontatocliente
+    defaults: { _controller: "ImaginativoTSBundle:Contato:newContatoCliente" }    
 
 contato_create:
     path:     /create
     defaults: { _controller: "ImaginativoTSBundle:Contato:create" }
     requirements: { _method: post }
+    
+contato_cliente_create:
+    path:     /{id}/createcontatocliente
+    defaults: { _controller: "ImaginativoTSBundle:Contato:createContatoCliente" }
+    requirements: { _method: post|put } 
+
 
 contato_edit:
     path:     /{id}/edit
