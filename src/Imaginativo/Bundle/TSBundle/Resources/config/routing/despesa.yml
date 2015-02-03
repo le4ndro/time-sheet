@@ -1,0 +1,30 @@
+despesa:
+    path:     /
+    defaults: { _controller: "ImaginativoTSBundle:Despesa:index" }
+
+despesa_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImaginativoTSBundle:Despesa:show" }
+
+despesa_new:
+    path:     /new
+    defaults: { _controller: "ImaginativoTSBundle:Despesa:new" }
+
+despesa_create:
+    path:     /create
+    defaults: { _controller: "ImaginativoTSBundle:Despesa:create" }
+    requirements: { _method: post }
+
+despesa_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImaginativoTSBundle:Despesa:edit" }
+
+despesa_update:
+    path:     /{id}/update
+    defaults: { _controller: "ImaginativoTSBundle:Despesa:update" }
+    requirements: { _method: post|put }
+
+despesa_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Despesa:delete" }
+    requirements: { _method: post|delete }

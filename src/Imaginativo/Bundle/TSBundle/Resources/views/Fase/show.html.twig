@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Fase</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Descricao</th>
+                <td>{{ entity.descricao }}</td>
+            </tr>
+            <tr>
+                <th>Dtinicio</th>
+                <td>{{ entity.dtInicio|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Dtfimprevisto</th>
+                <td>{{ entity.dtFimPrevisto|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Dtfim</th>
+                <td>{{ entity.dtFim|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Obs</th>
+                <td>{{ entity.obs }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('fase') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('fase_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

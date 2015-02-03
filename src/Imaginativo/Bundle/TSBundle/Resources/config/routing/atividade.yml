@@ -1,0 +1,30 @@
+atividade:
+    path:     /
+    defaults: { _controller: "ImaginativoTSBundle:Atividade:index" }
+
+atividade_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImaginativoTSBundle:Atividade:show" }
+
+atividade_new:
+    path:     /new
+    defaults: { _controller: "ImaginativoTSBundle:Atividade:new" }
+
+atividade_create:
+    path:     /create
+    defaults: { _controller: "ImaginativoTSBundle:Atividade:create" }
+    requirements: { _method: post }
+
+atividade_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImaginativoTSBundle:Atividade:edit" }
+
+atividade_update:
+    path:     /{id}/update
+    defaults: { _controller: "ImaginativoTSBundle:Atividade:update" }
+    requirements: { _method: post|put }
+
+atividade_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Atividade:delete" }
+    requirements: { _method: post|delete }

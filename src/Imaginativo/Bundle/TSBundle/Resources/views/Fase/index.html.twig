@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Fase list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Descricao</th>
+                <th>Dtinicio</th>
+                <th>Dtfimprevisto</th>
+                <th>Dtfim</th>
+                <th>Obs</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('fase_show', { 'id': entity.id }) }}">{{ entity.descricao }}</a></td>
+                <td>{% if entity.dtInicio %}{{ entity.dtInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dtFimPrevisto %}{{ entity.dtFimPrevisto|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dtFim %}{{ entity.dtFim|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.obs }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('fase_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fase_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('fase_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

@@ -1,3 +1,19 @@
+imaginativo_ts_hora:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/hora.yml"
+    prefix:   /hora
+
+imaginativo_ts_despesa:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/despesa.yml"
+    prefix:   /despesa
+
+imaginativo_ts_fase:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/fase.yml"
+    prefix:   /fase
+
+imaginativo_ts_atividade:
+    resource: "@ImaginativoTSBundle/Resources/config/routing/atividade.yml"
+    prefix:   /atividade
+
 imaginativo_ts_endereco:
     resource: "@ImaginativoTSBundle/Resources/config/routing/endereco.yml"
     prefix:   /endereco

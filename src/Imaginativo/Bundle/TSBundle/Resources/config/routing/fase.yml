@@ -1,0 +1,30 @@
+fase:
+    path:     /
+    defaults: { _controller: "ImaginativoTSBundle:Fase:index" }
+
+fase_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImaginativoTSBundle:Fase:show" }
+
+fase_new:
+    path:     /new
+    defaults: { _controller: "ImaginativoTSBundle:Fase:new" }
+
+fase_create:
+    path:     /create
+    defaults: { _controller: "ImaginativoTSBundle:Fase:create" }
+    requirements: { _method: post }
+
+fase_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImaginativoTSBundle:Fase:edit" }
+
+fase_update:
+    path:     /{id}/update
+    defaults: { _controller: "ImaginativoTSBundle:Fase:update" }
+    requirements: { _method: post|put }
+
+fase_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Fase:delete" }
+    requirements: { _method: post|delete }

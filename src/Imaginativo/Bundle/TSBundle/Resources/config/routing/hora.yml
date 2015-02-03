@@ -1,0 +1,30 @@
+hora:
+    path:     /
+    defaults: { _controller: "ImaginativoTSBundle:Hora:index" }
+
+hora_show:
+    path:     /{id}/show
+    defaults: { _controller: "ImaginativoTSBundle:Hora:show" }
+
+hora_new:
+    path:     /new
+    defaults: { _controller: "ImaginativoTSBundle:Hora:new" }
+
+hora_create:
+    path:     /create
+    defaults: { _controller: "ImaginativoTSBundle:Hora:create" }
+    requirements: { _method: post }
+
+hora_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ImaginativoTSBundle:Hora:edit" }
+
+hora_update:
+    path:     /{id}/update
+    defaults: { _controller: "ImaginativoTSBundle:Hora:update" }
+    requirements: { _method: post|put }
+
+hora_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImaginativoTSBundle:Hora:delete" }
+    requirements: { _method: post|delete }

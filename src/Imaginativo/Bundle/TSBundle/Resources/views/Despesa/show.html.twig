@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Despesa</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Nome</th>
+                <td>{{ entity.nome }}</td>
+            </tr>
+            <tr>
+                <th>Tipo</th>
+                <td>{{ entity.tipo }}</td>
+            </tr>
+            <tr>
+                <th>Dtdispesa</th>
+                <td>{{ entity.dtDispesa|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Reembolsavel</th>
+                <td>{{ entity.reembolsavel }}</td>
+            </tr>
+            <tr>
+                <th>Faturado</th>
+                <td>{{ entity.faturado }}</td>
+            </tr>
+            <tr>
+                <th>Aprovado</th>
+                <td>{{ entity.aprovado }}</td>
+            </tr>
+            <tr>
+                <th>Creditado</th>
+                <td>{{ entity.creditado }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('despesa') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('despesa_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
