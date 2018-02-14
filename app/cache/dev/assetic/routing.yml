@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: /Users/leandrosouza/repos/time-sheet/app/config/routing_dev.yml
