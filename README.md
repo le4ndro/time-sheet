@@ -1,69 +1,74 @@
-Symfony Standard Edition
-========================
+# Time-sheet
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+Sample project using Symfony2.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+## Getting Started
 
-What's inside?
---------------
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-The Symfony Standard Edition is configured with the following defaults:
+### Prerequisites
 
-  * An AppBundle you can use to start coding;
+What things you need to install the software and how to install them
 
-  * Twig as the only configured template engine;
+1. Install PHP and MySQL on your computer
+2. Install composer for dependencies
 
-  * Doctrine ORM/DBAL;
+### Installing
 
-  * Swiftmailer;
+A step by step series of examples that tell you have to get a development env running
 
-  * Annotations enabled for everything.
+Clone this repository and install dependencies
 
-It comes pre-configured with the following bundles:
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+1. $ git clone <this_repo>
+2. $ cd time-sheet
+3. $ composer install
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+Setting up our database
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+1. $ php app/console doctrine:database:create
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+2. $ php app/console doctrine:schema:update --force
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
 
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
+Run the application
 
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
 
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
+$ php app/console server:run
 
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
+Open your browser and access
 
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
 
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
+http://localhost:8000/
 
-Enjoy!
 
-[1]:  http://symfony.com/doc/2.6/book/installation.html
-[6]:  http://symfony.com/doc/2.6/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.6/book/doctrine.html
-[8]:  http://symfony.com/doc/2.6/book/templating.html
-[9]:  http://symfony.com/doc/2.6/book/security.html
-[10]: http://symfony.com/doc/2.6/cookbook/email.html
-[11]: http://symfony.com/doc/2.6/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.6/cookbook/assetic/asset_management.html
-[13]: http://symfony.com/doc/2.6/bundles/SensioGeneratorBundle/index.html
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+* [Symfony2](https://symfony.com/doc/2.6/index.html) - The web framework used
+* [Composer](https://getcomposer.org/) - Dependency Management
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning.
+
+## Authors
+
+* **Leandro Souza** - *Initial work*
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* This project is in development
